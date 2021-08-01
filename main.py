@@ -35,11 +35,33 @@ Iced Coffee                 $2.50
         EspNum = int(input('How Many Espressos Would You Like? '))
         LatNum = int(input('How Many Lattes Would You Like? '))
         IcCofNum = int(input('How Many Iced Coffees Would You Like? '))
-        OrderPrc = (CapNum * CapPrc) * (EspNum * EspPrc) * (LatNum * LatPrc) * (IcCofNum * IcCofPrc)
+        OrderPrc = (CapNum * CapPrc) + (EspNum * EspPrc) + (LatNum * LatPrc) + (IcCofNum * IcCofPrc)
         OrderType = input('Would you like this order to be dine-in or take-away (keep in mind that a take-away order will incur an additional 5% surcharge)? ').lower()
         if OrderType == 'dine-in' or 'dine in' or 'dinein':
-            print('this is a place keeper to alleviate errors for testing')
+            TotalIncGST = "{:.2f}".format(OrderPrc * 1.1)
+            print(f'''{CapNum} Cappuccinos at ${"{:.2f}".format(CapNum * CapPrc)}
+{EspNum} Espressos at ${"{:.2f}".format(EspNum * EspPrc)}
+{LatNum} Lattes at ${"{:.2f}".format(LatNum * LatPrc)}
+{IcCofNum} Iced Coffees at ${"{:.2f}".format(IcCofNum * IcCofPrc)}
+    Total Price +GST: ${TotalIncGST}
+''')
+            TotalIncGST = float(TotalIncGST)
+            AmtTendered = float(input('How much have you paid? $'))
+            if AmtTendered > TotalIncGST:
+                Change = AmtTendered - TotalIncGST
+                print(f'Your Change Is ${Change}')
+                print('Thank You For Coming To Cafe Au Lait. Enjoy Your Drinks.')
+            elif AmtTendered < TotalIncGST:
+                Extra = TotalIncGST - AmtTendered
+                print(f'You Need To Pay An Extra ${Extra}')
+                print('Thank You For Coming To Cafe Au Lait. Enjoy Your Drinks.')
+            elif AmtTendered == TotalIncGST:
+                print('Thank You For Coming To Cafe Au Lait. Enjoy Your Drinks.')
+            else:
+                print('Invalid Response Try Again')
         elif OrderType == 'take-away' or 'take away' or 'takeaway':
             print('this is a place keeper to alleviate errors for testing')
-    elif Mode == 'Daily Report' or 'Daily report' or 'daily Report' or 'daily report':
+    elif Mode == 'daily report':
         print('this is a place keeper to alleviate errors for testing')
+    else:
+        print('Invalid Response Try Again')
