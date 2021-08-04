@@ -1,4 +1,13 @@
-print('𝓒𝓪𝓯é 𝓐𝓾 𝓛𝓪𝓲𝓽')
+print('''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+╭━━━╮   ╭━╮   ╭━━━╮   ╭╮      ╭╮
+┃╭━╮┃   ┃╭╯   ┃╭━╮┃   ┃┃     ╭╯╰╮
+┃┃ ╰╋━━┳╯╰┳━━╮┃┃ ┃┣╮╭╮┃┃  ╭━━╋╮╭╯
+┃┃ ╭┫╭╮┣╮╭┫┃━┫┃╰━╯┃┃┃┃┃┃ ╭┫╭╮┣┫┃
+┃╰━╯┃╭╮┃┃┃┃┃━┫┃╭━╮┃╰╯┃┃╰━╯┃╭╮┃┃╰╮
+╰━━━┻╯╰╯╰╯╰━━╯╰╯ ╰┻━━╯╰━━━┻╯╰┻┻━╯
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                          ''')
 a = 1
 EspShotPrc = 0.60
 CapMilkPrc = 0.15
@@ -46,16 +55,26 @@ Iced Coffee                 $2.50
     Total Price +GST: ${TotalIncGST}
 ''')
             TotalIncGST = float(TotalIncGST)
-            AmtTendered = float(input('How much have you paid? $'))
-            if AmtTendered > TotalIncGST:
-                Change = AmtTendered - TotalIncGST
+            AmtPaid = float(input('How much have you paid? $'))
+            if AmtPaid > TotalIncGST:
+                Change = "{:.2f}".format(AmtPaid - TotalIncGST)
                 print(f'Your Change Is ${Change}')
                 print('Thank You For Coming To Cafe Au Lait. Enjoy Your Drinks.')
-            elif AmtTendered < TotalIncGST:
-                Extra = TotalIncGST - AmtTendered
-                print(f'You Need To Pay An Extra ${Extra}')
+                print('')
+            elif AmtPaid < TotalIncGST:
+                SumExtra = float("{:.2f}".format(TotalIncGST - AmtPaid))
+                print(f'You Need To Pay An Extra ${SumExtra}')
+                while float(SumExtra) > float(0.00):
+                    AmtPaid = float(input('How much have you paid? $'))
+                    SumExtra = float("{:.2f}".format(SumExtra - AmtPaid))
+                    if SumExtra > float(0.00):
+                        print(f'You Need To Pay An Extra ${SumExtra}')
+                    elif float(SumExtra) < float(0.00):
+                        Change = (-1 * SumExtra)
+                        print(f'Your Change Is ${Change}')
                 print('Thank You For Coming To Cafe Au Lait. Enjoy Your Drinks.')
-            elif AmtTendered == TotalIncGST:
+                print('')
+            elif AmtPaid == TotalIncGST:
                 print('Thank You For Coming To Cafe Au Lait. Enjoy Your Drinks.')
             else:
                 print('Invalid Response Try Again')
