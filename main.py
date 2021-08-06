@@ -1,3 +1,4 @@
+import csv
 print('''
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ╭━━━╮   ╭━╮   ╭━━━╮   ╭╮      ╭╮
@@ -66,10 +67,10 @@ Iced Coffee                 $2.50
         if OrderType == 'dine-in' or 'dine in' or 'dinein':
             TotalIncGST = "{:.2f}".format(OrderPrc * 1.1)
             print(f'''
-{CapNum} Cappuccinos at ${"{:.2f}".format(CapNum * CapPrc)}
-{EspNum} Espressos at ${"{:.2f}".format(EspNum * EspPrc)}
-{LatNum} Lattes at ${"{:.2f}".format(LatNum * LatPrc)}
-{IcCofNum} Iced Coffees at ${"{:.2f}".format(IcCofNum * IcCofPrc)}
+{CapNum} Cappuccino/s at ${"{:.2f}".format(CapNum * CapPrc)}
+{EspNum} Espresso/s at ${"{:.2f}".format(EspNum * EspPrc)}
+{LatNum} Latte/s at ${"{:.2f}".format(LatNum * LatPrc)}
+{IcCofNum} Iced Coffee/s at ${"{:.2f}".format(IcCofNum * IcCofPrc)}
     Total Price +GST: ${TotalIncGST}''')
             print('')
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -179,7 +180,6 @@ Iced Coffee                 $2.50
 Order Statistics:
     Number Of Orders            {TotalOrders}
     Number Of Coffees           {TotalCap + TotalEsp + TotalLat + TotalIcCof}
-
     Number Of Cappuccinos       {TotalCap}
     Number Of Espressos         {TotalEsp}
     Number Of Lattes            {TotalLat}
@@ -191,9 +191,29 @@ Money
     Milk Spending               ${"{:.2f}".format(MilkSpend)}
     Ice Cream Spending          ${"{:.2f}".format(IceCreamSpend)}
     Total profit                ${"{:.2f}".format(TotalEarnings - TotalSpend)}''')
+            Data = (f'{TotalOrders}, {TotalCap}, {TotalEsp}, {TotalLat}, {TotalIcCof}, {TotalEarnings}')
             print('')
             print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
             print('')
+            Update = input('Would You Like To Update The CSV File? ').lower()
+            if Update == 'yes':
+                File = open('test.csv', 'w')
+                writer = csv.writer(File)
+                writer.writerow(Data)
+                File.close()
+                print('')
+                print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+                print('')
+            elif Update == 'no':
+                print('OK. Just Ensure To Do This Before Closing The Program.')
+                print('')
+                print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+                print('')
+            else:
+                print('Invalid Response Try Again')
+                print('')
+                print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+                print('')
         else:
             print('Wrong Code. Try Again')
             print('')
